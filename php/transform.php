@@ -39,6 +39,8 @@ $transformedData = [];
 
 // Transformiert und fügt die notwendigen Informationen hinzu
 
+// print_r($data);
+
 foreach ($data as $location) {
     // Bestimmt den Stadtnamen anhand von Breitengrad und Längengrad
     $cityKey = $location['latitude'] . ',' . $location['longitude'];
