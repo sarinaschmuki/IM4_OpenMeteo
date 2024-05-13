@@ -1,0 +1,167 @@
+/* Grundlegende Styles für alle Bildschirmgrößen */
+
+html, body {
+    height: 100%;
+}
+body {
+    background-color: #ffffff;
+    margin: 0;
+    font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    min-height: 100%;
+    padding: 20px; /* Reduziertes Padding für kleine Bildschirme */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #9AB59C; /* Hintergrund hinter dem Container */
+}
+.container {
+    position: relative;
+    width: 100%; /* Flexiblere Breite statt fester Breite */
+    max-width: 600px; /* Maximalbreite für große Bildschirme */
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    text-align: center;
+    background-color: #ffffff; /* Hintergrundfarbe des Containers selbst */
+    margin: auto;
+}
+
+h1 {
+    font-size: 2rem; /* Erhöhte Schriftgröße */
+    font-weight: 700; /* Fettschrift */
+    margin-bottom: 20px;
+    font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h2 {
+    font-size: 1.2rem; /* Reduzierte Schriftgröße für h2 */
+    font-weight: 400; /* Nicht fett */
+    margin-bottom: 20px; /* Vergrößerter Abstand zu Dropdowns */
+    font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.logo {
+    max-width: 80%; /* Ermöglicht das Responsive-Verhalten des Logos */
+    height: auto; /* Behält das Seitenverhältnis des Logos bei */
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.karte {
+    max-width: 100%; /* Verhindert Überlauf auf kleinen Geräten */
+    height: auto; /* Behält das Seitenverhältnis der Karte bei */
+    display: block;
+    margin: 0 auto;
+}
+
+select {
+    font-size: 1rem; /* Reduzierte Schriftgröße für Dropdowns */
+    padding: 8px 12px; /* Reduziertes Padding für bessere Klickbarkeit */
+    margin-bottom: 30px; /* Angepasster Abstand nach unten zu weiteren Inhalten */
+    width: 60%; /* Verringerte Breite der Dropdowns */
+    cursor: pointer; /* Cursor ändern, um Interaktivität zu signalisieren */
+}
+
+/* Stile für die Legende */
+.legend {
+    margin-top: 20px;
+    text-align: center;
+    display: flex; /* Flexbox für horizontale Anordnung */
+    justify-content: center; /* Zentriert die Legende im Container */
+    flex-wrap: wrap; /* Ermöglicht Umbrüche für kleinere Bildschirme */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center; /* Zentriert die Elemente vertikal in jedem legend-item */
+    margin-right: 15px; /* Abstand zwischen den Legenden-Items */
+    margin-bottom: 10px; /* Vertikaler Abstand für Umbrüche */
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.description {
+    font-size: 1rem;
+}
+
+/* Media Queries für Tablets */
+@media (min-width: 768px) {
+    .container {
+        width: 80%; /* Breitere Container auf Tablets */
+        max-width: 850px; /* Erhöhte Maximalbreite für größere Bildschirme */
+        padding: 50px; /* Mehr Innenabstand für bessere Lesbarkeit */
+    }
+    h1 {
+        font-size: 2.5rem; /* Größere Schriftgröße auf Tablets */
+    }
+    h2 {
+        font-size: 1.5rem; /* Angepasste Schriftgröße auf Tablets */
+        margin-bottom: 30px; /* Vergrößerter Abstand zu Dropdowns auf Tablets */
+    }
+    select {
+        width: 70%; /* Etwas breitere Dropdowns auf Tablets */
+    }
+}
+
+/* Media Queries für Desktop */
+@media (min-width: 992px) {
+    .container {
+        width: 70%; /* Noch breitere Container auf Desktops */
+        max-width: 1000px; /* Erhöhte Maximalbreite für große Bildschirme */
+        padding: 40px; /* Mehr Innenabstand für bessere Lesbarkeit */
+    }
+    h1 {
+        font-size: 3rem; /* Größere Schriftgröße auf Desktops */
+    }
+    h2 {
+        font-size: 1.75rem; /* Angepasste Schriftgröße auf Desktops */
+        margin-bottom: 40px; /* Vergrößerter Abstand zu Dropdowns auf Desktops */
+    }
+    select {
+        width: 70%; /* Konsistente Breite der Dropdowns auf Desktops */
+    }
+}
+
+/* Media Queries für Handys */
+@media (max-width: 767px) {
+    .legend {
+        flex-direction: column; /* Stapelt Legenden-Items vertikal */
+        align-items: flex-start; /* Ausrichtung der Items am Anfang */
+    }
+    .legend-item {
+        display: flex; /* Verwendet Flexbox für die Item-Ausrichtung */
+        align-items: center; /* Zentriert die Items vertikal */
+        margin-right: 0; /* Entfernt horizontalen Abstand */
+        margin-bottom: 15px; /* Vergrößert vertikalen Abstand */
+        width: 100%; /* Stellt sicher, dass Items die volle Breite nutzen */
+    }
+    .color-box {
+        width: 20px;
+        height: 20px;
+        display: block; /* Verändert das Display, um bessere Kontrolle zu haben */
+        margin-right: 10px;
+    }
+    .description {
+        flex: 1; /* Nimmt verfügbaren Platz ein und sorgt für Ausrichtung */
+        text-align: left; /* Textausrichtung links */
+    }
+}
+
+

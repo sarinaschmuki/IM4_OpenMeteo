@@ -1,41 +1,145 @@
-
-// Fetch in eine Funktion packen & Fetch asynchron ausführen
-let url = 'https://374887-3.web.fhgr.ch/php/unload.php';
-let data; 
+// Asynchrone Funktion zum Abrufen von Daten
 async function fetchData(url) {
-    try {
-        let response = await fetch(url);
-        let data = await response.json();
-        return data; 
-    }
-    catch (error) {
-        console.log(error);
-    }
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null; // Return null to handle errors where the data is expected
+  }
 }
-async function init(){
-    data = await fetch(url); 
-    let response = await fetch(url);
-    console.log(data); 
+
+// Farben basierend auf Pollenanzahl definieren
+const pollenColors = {
+  0: '#AAAAAA',    // Keine Pollenaktivität
+  1: '#C7E0C9',    // Geringe Aktivität (1-25 no/m3)
+  25: '#9AB59C',   // Mittlere Aktivität (26-50 no/m3)
+  50: '#586B5A'    // Hohe Aktivität (>50 no/m3)
+};
+
+// Variable, um den zuletzt ausgewählten Kanton zu speichern
+let lastSelectedKanton = null;
+
+// Funktion zum Einfärben der Karte basierend auf Pollendaten
+async function colorMap(selectedDate, selectedPollenType) {
+  const url = 'https://374887-3.web.fhgr.ch/php/unload.php';
+  const data = await fetchData(url);
+
+  if (!data) {
+    console.error('No data available to color the map');
+    return;
+  }
+
+  const svgDocument = document.querySelector('svg');  // Geändert, um das SVG-Dokument korrekt zu selektieren
+  
+  // Sicherstellen, dass alle Kantone auf die Standardfarbe zurückgesetzt werden
+  document.querySelectorAll('.st2').forEach(kantonElement => {
+    kantonElement.style.fill = pollenColors[0];
+    if (kantonElement.parentNode.querySelector('.st1')) {
+      kantonElement.parentNode.querySelector('.st1').style.stroke = ""; // Geändert, um die Umrandung zurückzusetzen
+      kantonElement.parentNode.querySelector('.st1').style.strokeWidth = "";
+    }
+  });
+
+  Object.keys(data).forEach(kanton => {
+    const kantonData = data[kanton][selectedDate] || {};
+    const pollenLevel = kantonData[selectedPollenType];
+
+    let color = pollenColors[0]; // Standardfarbe für keine Pollenaktivität
+    if (pollenLevel > 50) {
+      color = pollenColors[50];
+    } else if (pollenLevel > 25) {
+      color = pollenColors[25];
+    } else if (pollenLevel > 0) {
+      color = pollenColors[1];
+    }
+
+    const kantonElement = svgDocument.getElementById(kanton);
+    if (kantonElement) {
+      kantonElement.style.fill = color;
+    }
+  });
 }
+
+// Event Listener für die Dropdowns zur Aktualisierung der Karte
+function updateMapFromDropdowns() {
+  const selectedDate = document.getElementById('dateSelect').value;
+  const selectedPollenType = document.getElementById('pollenTypeSelect').value;
+  colorMap(selectedDate, selectedPollenType);
+}
+
+document.getElementById('pollenTypeSelect').addEventListener('change', updateMapFromDropdowns);
+document.getElementById('dateSelect').addEventListener('change', updateMapFromDropdowns);
+
+// Funktion zum Füllen des Datum-Dropdowns basierend auf verfügbaren Daten
+async function fillDateDropdown() {
+  const data = await fetchData('https://374887-3.web.fhgr.ch/php/unload.php');
+  
+  if (!data) {
+    console.error('No data available to fill the date dropdown');
+    return;
+  }
+
+  const dateSelect = document.getElementById('dateSelect');
+  let uniqueDates = new Set();
+  
+  Object.keys(data).forEach(kanton => {
+    Object.keys(data[kanton]).forEach(date => {
+      uniqueDates.add(date);
+    });
+  });
+
+  uniqueDates = Array.from(uniqueDates).sort();
+
+  dateSelect.innerHTML = ''; // Clear existing options
+  uniqueDates.forEach(date => {
+    const option = document.createElement('option');
+    option.value = date;
+    option.innerText = date;
+    dateSelect.appendChild(option);
+  });
+
+  if (uniqueDates.length > 0) {
+    dateSelect.value = uniqueDates[0];
+    updateMapFromDropdowns(); // Initial update after filling the dropdown
+  }
+}
+
+// Initialisierung der Anwendung beim Laden
+async function init() {
+  await fillDateDropdown();
+}
+
 init();
 
+// Funktion zum Anzeigen der Pollendetails beim Klicken auf einen Kanton
+document.querySelectorAll('.st2').forEach(kantonElement => {
+  kantonElement.addEventListener('click', async () => {
+    const kanton = kantonElement.id;
+    const selectedDate = document.getElementById('dateSelect').value;
+    const selectedPollenType = document.getElementById('pollenTypeSelect').value;
+    const data = await fetchData('https://374887-3.web.fhgr.ch/php/unload.php');
+    
+    if (data && data[kanton] && data[kanton][selectedDate]) {
+      const details = data[kanton][selectedDate][selectedPollenType];
+      const infoText = details !== undefined ? `${selectedPollenType.replace(/_/g, ' ')}: ${details}` : 'Keine Daten verfügbar.';
+      document.getElementById('infoText').innerText = infoText;
+      document.getElementById('pollenInfo').classList.remove('hidden');
 
-const pollenAlarm = document.querySelector('#pollenAlarm');
-new Chart(pollenAlarm, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+      // Umrandung Schwarz für den ausgewählten Kanton
+      if (lastSelectedKanton) {
+        const lastKantonElement = document.getElementById(lastSelectedKanton);
+        if (lastKantonElement && lastKantonElement.parentNode.querySelector('.st1')) {
+          lastKantonElement.parentNode.querySelector('.st1').style.stroke = ""; // Reset the previous selected kanton
+          lastKantonElement.parentNode.querySelector('.st1').style.strokeWidth = "";
         }
+      }
+      if (kantonElement.parentNode.querySelector('.st1')) {
+        kantonElement.parentNode.querySelector('.st1').style.stroke = "#000000"; // Set new selected kanton outline
+        kantonElement.parentNode.querySelector('.st1').style.strokeWidth = "3";
+        lastSelectedKanton = kanton; // Store the current selected kanton
       }
     }
   });
+});
