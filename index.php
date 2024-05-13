@@ -35,10 +35,9 @@
         <h2>Pollen Details</h2>
         <p id="infoText"></p>
     </div>
+    <br>
+</br>
     <main> 
-        <div>
-            <canvas id="pollenAlarm"></canvas>
-          </div>
           <!-- Legende für Pollenaktivität -->
 <div class="legend">
     <div class="legend-item">

@@ -7,7 +7,7 @@ body {
     background-color: #ffffff;
     margin: 0;
     font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
 }
 * {
     -webkit-box-sizing: border-box;
@@ -53,7 +53,7 @@ h2 {
 }
 
 .logo {
-    max-width: 80%; /* Ermöglicht das Responsive-Verhalten des Logos */
+    max-width: 90%; /* Ermöglicht das Responsive-Verhalten des Logos */
     height: auto; /* Behält das Seitenverhältnis des Logos bei */
     display: block;
     margin: 0 auto 20px;
@@ -73,7 +73,22 @@ select {
     width: 60%; /* Verringerte Breite der Dropdowns */
     cursor: pointer; /* Cursor ändern, um Interaktivität zu signalisieren */
 }
+/* Stile für die Pollen-Info Kästchen */
+.pollen-info {
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #d4d4d4; /* Helle grüne Farbe für den Hintergrund */
+    border: 2px solid #333; /* Dunklere grüne Farbe für den Rand */
+    border-radius: 10px; /* Abgerundete Ecken */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Schatten für 3D-Effekt */
+    display: inline-block;
+    max-width: 100%; /* Sicherstellen, dass es innerhalb des Containers bleibt */
+}
 
+.infoText {
+    font-size: 3rem;
+    color: #333; /* Dunkelgraue Schriftfarbe für Lesbarkeit */
+}
 /* Stile für die Legende */
 .legend {
     margin-top: 20px;

@@ -31,13 +31,13 @@ async function colorMap(selectedDate, selectedPollenType) {
     return;
   }
 
-  const svgDocument = document.querySelector('svg');  // Geändert, um das SVG-Dokument korrekt zu selektieren
+  const svgDocument = document.querySelector('svg');
   
   // Sicherstellen, dass alle Kantone auf die Standardfarbe zurückgesetzt werden
   document.querySelectorAll('.st2').forEach(kantonElement => {
     kantonElement.style.fill = pollenColors[0];
     if (kantonElement.parentNode.querySelector('.st1')) {
-      kantonElement.parentNode.querySelector('.st1').style.stroke = ""; // Geändert, um die Umrandung zurückzusetzen
+      kantonElement.parentNode.querySelector('.st1').style.stroke = "";
       kantonElement.parentNode.querySelector('.st1').style.strokeWidth = "";
     }
   });
@@ -120,26 +120,25 @@ document.querySelectorAll('.st2').forEach(kantonElement => {
     const selectedDate = document.getElementById('dateSelect').value;
     const selectedPollenType = document.getElementById('pollenTypeSelect').value;
     const data = await fetchData('https://374887-3.web.fhgr.ch/php/unload.php');
-    
+
     if (data && data[kanton] && data[kanton][selectedDate]) {
       const details = data[kanton][selectedDate][selectedPollenType];
-      const infoText = details !== undefined ? `${selectedPollenType.replace(/_/g, ' ')}: ${details}` : 'Keine Daten verfügbar.';
+      const infoText = details !== undefined ? `${details}` : 'Keine Daten verfügbar.';
       document.getElementById('infoText').innerText = infoText;
       document.getElementById('pollenInfo').classList.remove('hidden');
 
-      // Umrandung Schwarz für den ausgewählten Kanton
-      if (lastSelectedKanton) {
-        const lastKantonElement = document.getElementById(lastSelectedKanton);
-        if (lastKantonElement && lastKantonElement.parentNode.querySelector('.st1')) {
-          lastKantonElement.parentNode.querySelector('.st1').style.stroke = ""; // Reset the previous selected kanton
-          lastKantonElement.parentNode.querySelector('.st1').style.strokeWidth = "";
-        }
+      // Reset previous selected kanton's outline
+      if (lastSelectedKanton && document.getElementById(lastSelectedKanton)) {
+        const lastKantonPath = document.getElementById(lastSelectedKanton);
+        lastKantonPath.style.stroke = "";
+        lastKantonPath.style.strokeWidth = "";s
       }
-      if (kantonElement.parentNode.querySelector('.st1')) {
-        kantonElement.parentNode.querySelector('.st1').style.stroke = "#000000"; // Set new selected kanton outline
-        kantonElement.parentNode.querySelector('.st1').style.strokeWidth = "3";
-        lastSelectedKanton = kanton; // Store the current selected kanton
-      }
+
+      // Set new selected kanton outline
+      kantonElement.style.stroke = "#333"; // Schwarz
+      kantonElement.style.strokeWidth = "8"; // Dicke der Umrandung
+
+      lastSelectedKanton = kanton; // Update the last selected kanton
     }
   });
 });
