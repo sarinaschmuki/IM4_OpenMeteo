@@ -98,7 +98,7 @@ document.querySelectorAll('.st2').forEach(kantonElement => {
 
     if (data && data[kanton] && data[kanton][dateTime]) {
       const details = data[kanton][dateTime][selectedPollenType];
-      document.getElementById('infoText').innerText = `${details} no/m3`;
+      document.getElementById('infoText').innerText = `${details}`;
       document.getElementById('pollenInfo').classList.remove('hidden');
 
       if (lastSelectedKanton) {
@@ -143,8 +143,5 @@ async function fillDateDropdown() {
     dateSelect.appendChild(option);
   });
 
-  /*if (uniqueDates.length > 0) {
-    dateSelect.value = uniqueDates[0];
-    updateMapFromSelection();
-  }*/
+
 }

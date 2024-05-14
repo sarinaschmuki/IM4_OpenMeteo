@@ -14,7 +14,7 @@
                 <img class="logo" src="Bilder/Logo_Pollenpuls.png" alt="PollenPuls Logo">
             </div>
             <h1>Pollenaktivität Schweiz</h1>
-            <h2>Welche Umgebung heute zum Wandern meiden?</h2>
+            <h2>Wandern gehen ohne Heuschnupfen.</h2>
             <div id="pollenTypeSelect">
                 <label><input type="radio" name="pollenType" value="alder_pollen" class="pollen-checkbox"> Erlenpollen</label>
                 <label><input type="radio" name="pollenType" value="birch_pollen" class="pollen-checkbox" checked> Birkenpollen</label>
@@ -59,7 +59,7 @@
                 <?php echo file_get_contents('Bilder/Karte.svg'); ?>
             </div>
             <div id="pollenInfo" class="pollen-info hidden">
-                <h2>Pollenbelastung pro Kubikmeter</h2>
+                <h2>Pollenbelastung pro m&sup3</h2>
                 <p id="infoText"></p>
             </div>
             <main>
@@ -71,15 +71,15 @@
                     </div>
                     <div class="legend-item">
                         <span class="color-box" style="background-color: #C7E0C9;"></span>
-                        <span class="description">Gering 1-25 no/m3</span>
+                        <span class="description">Gering 1-25 no/m&sup3</span>
                     </div>
                     <div class="legend-item">
                         <span class="color-box" style="background-color: #9AB59C;"></span>
-                        <span class="description">Mittel 25-50 no/m3</span>
+                        <span class="description">Mittel 25-50 no/m&sup3</span>
                     </div>
                     <div class="legend-item">
                         <span class="color-box" style="background-color: #586B5A;"></span>
-                        <span class="description">Stark ab 50 no/m3</span>
+                        <span class="description">Stark ab 50 no/m&sup3</span>
                     </div>
                 </div>
             </main>
