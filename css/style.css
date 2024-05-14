@@ -10,99 +10,106 @@ body {
     font-size: 18px;
 }
 * {
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 .wrapper {
     min-height: 100%;
-    padding: 20px; /* Reduziertes Padding für kleine Bildschirme */
-    box-sizing: border-box;
+    padding: 20px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #9AB59C; /* Hintergrund hinter dem Container */
+    background-color: #9AB59C;
 }
 .container {
-    position: relative;
-    width: 100%; /* Flexiblere Breite statt fester Breite */
-    max-width: 600px; /* Maximalbreite für große Bildschirme */
+    width: 100%;
+    max-width: 600px;
     padding: 20px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     border-radius: 20px;
-    text-align: center;
-    background-color: #ffffff; /* Hintergrundfarbe des Containers selbst */
+    background-color: #ffffff;
     margin: auto;
 }
 
 h1 {
-    font-size: 2rem; /* Erhöhte Schriftgröße */
-    font-weight: 700; /* Fettschrift */
+    font-size: 2rem;
+    font-weight: 700;
     margin-bottom: 20px;
-    font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 h2 {
-    font-size: 1.2rem; /* Reduzierte Schriftgröße für h2 */
-    font-weight: 400; /* Nicht fett */
-    margin-bottom: 20px; /* Vergrößerter Abstand zu Dropdowns */
-    font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 20px;
 }
 
 .logo {
-    max-width: 90%; /* Ermöglicht das Responsive-Verhalten des Logos */
-    height: auto; /* Behält das Seitenverhältnis des Logos bei */
+    max-width: 90%;
+    height: auto;
     display: block;
     margin: 0 auto 20px;
 }
 
 .karte {
-    max-width: 100%; /* Verhindert Überlauf auf kleinen Geräten */
-    height: auto; /* Behält das Seitenverhältnis der Karte bei */
+    max-width: 100%;
+    height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 0px auto 30px;
 }
 
-select {
-    font-size: 1rem; /* Reduzierte Schriftgröße für Dropdowns */
-    padding: 8px 12px; /* Reduziertes Padding für bessere Klickbarkeit */
-    margin-bottom: 30px; /* Angepasster Abstand nach unten zu weiteren Inhalten */
-    width: 60%; /* Verringerte Breite der Dropdowns */
-    cursor: pointer; /* Cursor ändern, um Interaktivität zu signalisieren */
+#pollenTypeSelect {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Ermöglicht Umbrüche für kleinere Bildschirme */
 }
-/* Stile für die Pollen-Info Kästchen */
+
+#dateSelect, #hourSelect {
+    font-size: 1rem;  /* Größere Schriftgröße für bessere Lesbarkeit */
+    width: 50%;       /* Breite der Eingabefelder */
+    padding: 12px 20px; /* Padding für größere Klickfläche und bessere Sichtbarkeit */
+    margin: 10px auto;  /* Zentriert die Elemente und gibt vertikalen Abstand */
+    display: block;   /* Ermöglicht margin auto zu wirken */
+    border: 2px solid #cccccc; /* Grenze für Eingabefelder */
+    border-radius: 4px; /* Leicht abgerundete Ecken für die Eingabefelder */
+    background-color: #f9f9f9; /* Hintergrundfarbe der Eingabefelder */
+}
+
+.pollen-checkbox {
+    margin-right: 5px;
+}
+
 .pollen-info {
+    width: 65%;
     margin: 20px auto;
     padding: 10px;
-    background-color: #d4d4d4; /* Helle grüne Farbe für den Hintergrund */
-    border: 2px solid #333; /* Dunklere grüne Farbe für den Rand */
-    border-radius: 10px; /* Abgerundete Ecken */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Schatten für 3D-Effekt */
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     display: inline-block;
-    max-width: 100%; /* Sicherstellen, dass es innerhalb des Containers bleibt */
+    max-width: 100%;
 }
 
 .infoText {
-    font-size: 3rem;
-    color: #333; /* Dunkelgraue Schriftfarbe für Lesbarkeit */
+    font-size: 16px;
+    color: #333;
 }
-/* Stile für die Legende */
+
 .legend {
     margin-top: 20px;
     text-align: center;
-    display: flex; /* Flexbox für horizontale Anordnung */
-    justify-content: center; /* Zentriert die Legende im Container */
-    flex-wrap: wrap; /* Ermöglicht Umbrüche für kleinere Bildschirme */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .legend-item {
     display: flex;
-    align-items: center; /* Zentriert die Elemente vertikal in jedem legend-item */
-    margin-right: 15px; /* Abstand zwischen den Legenden-Items */
-    margin-bottom: 10px; /* Vertikaler Abstand für Umbrüche */
+    align-items: center;
+    margin-right: 15px;
+    margin-bottom: 10px;
 }
 
 .color-box {
@@ -116,67 +123,71 @@ select {
     font-size: 1rem;
 }
 
-/* Media Queries für Tablets */
+/* Media Queries für verschiedene Bildschirmgrößen */
+
 @media (min-width: 768px) {
     .container {
-        width: 80%; /* Breitere Container auf Tablets */
-        max-width: 850px; /* Erhöhte Maximalbreite für größere Bildschirme */
-        padding: 50px; /* Mehr Innenabstand für bessere Lesbarkeit */
+        width: 80%;
+        max-width: 850px;
+        padding: 50px;
+    }
+    .pollen-info {
+        width: 70%;
     }
     h1 {
-        font-size: 2.5rem; /* Größere Schriftgröße auf Tablets */
+        font-size: 2.5rem;
     }
     h2 {
-        font-size: 1.5rem; /* Angepasste Schriftgröße auf Tablets */
-        margin-bottom: 30px; /* Vergrößerter Abstand zu Dropdowns auf Tablets */
+        font-size: 1.5rem;
+        margin-bottom: 30px;
     }
-    select {
-        width: 70%; /* Etwas breitere Dropdowns auf Tablets */
+    #dateSelect, #hourSelect {
+        font-size: 1.1rem;
+        width: 60%;
     }
 }
 
-/* Media Queries für Desktop */
 @media (min-width: 992px) {
     .container {
-        width: 70%; /* Noch breitere Container auf Desktops */
-        max-width: 1000px; /* Erhöhte Maximalbreite für große Bildschirme */
-        padding: 40px; /* Mehr Innenabstand für bessere Lesbarkeit */
+        width: 70%;
+        max-width: 1000px;
+        padding: 40px;
+    }
+    .pollen-info {
+        width: 60%;
     }
     h1 {
-        font-size: 3rem; /* Größere Schriftgröße auf Desktops */
+        font-size: 3rem;
     }
     h2 {
-        font-size: 1.75rem; /* Angepasste Schriftgröße auf Desktops */
-        margin-bottom: 40px; /* Vergrößerter Abstand zu Dropdowns auf Desktops */
+        font-size: 1.75rem;
+        margin-bottom: 40px;
     }
-    select {
-        width: 70%; /* Konsistente Breite der Dropdowns auf Desktops */
+    #dateSelect, #hourSelect {
+        width: 50%;
     }
 }
 
-/* Media Queries für Handys */
 @media (max-width: 767px) {
     .legend {
-        flex-direction: column; /* Stapelt Legenden-Items vertikal */
-        align-items: flex-start; /* Ausrichtung der Items am Anfang */
+        flex-direction: column;
+        align-items: flex-start;
     }
     .legend-item {
-        display: flex; /* Verwendet Flexbox für die Item-Ausrichtung */
-        align-items: center; /* Zentriert die Items vertikal */
-        margin-right: 0; /* Entfernt horizontalen Abstand */
-        margin-bottom: 15px; /* Vergrößert vertikalen Abstand */
-        width: 100%; /* Stellt sicher, dass Items die volle Breite nutzen */
+        display: flex;
+        align-items: center;
+        margin-right: 0;
+        margin-bottom: 15px;
+        width: 100%;
     }
     .color-box {
         width: 20px;
         height: 20px;
-        display: block; /* Verändert das Display, um bessere Kontrolle zu haben */
+        display: block;
         margin-right: 10px;
     }
     .description {
-        flex: 1; /* Nimmt verfügbaren Platz ein und sorgt für Ausrichtung */
-        text-align: left; /* Textausrichtung links */
+        flex: 1;
+        text-align: left;
     }
 }
-
-
