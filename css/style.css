@@ -1,21 +1,21 @@
 /* Grundlegende Styles für alle Bildschirmgrößen */
-
 html, body {
     height: 100%;
 }
+
 body {
     background-color: #ffffff;
     margin: 0;
     font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 18px;
 }
+
 * {
     box-sizing: border-box;
 }
 
 .wrapper {
     min-height: 100%;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,33 +23,47 @@ body {
     text-align: center;
     background-color: #9AB59C;
 }
+
 .container {
     width: 100%;
-    max-width: 600px;
-    padding: 20px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
     border-radius: 20px;
     background-color: #ffffff;
     margin: auto;
 }
 
+h1, h2 {
+    line-height: 1.2;
+}
+
 h1 {
-    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
 
 h2 {
-    font-size: 1.2rem;
     font-weight: 400;
+    margin-top: 0;
     margin-bottom: 20px;
 }
 
+p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+.logo-container {
+    text-align: center;
+}
+
 .logo {
-    max-width: 90%;
     height: auto;
-    display: block;
-    margin: 0 auto 20px;
+    width: 500px; /* Feste Breite für das Logo */
 }
 
 .karte {
@@ -62,14 +76,16 @@ h2 {
 #pollenTypeSelect {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
     flex-wrap: wrap; /* Ermöglicht Umbrüche für kleinere Bildschirme */
+}
+
+.dateSelect {
+    margin-bottom: 12px;
 }
 
 #dateSelect, #hourSelect {
     font-size: 1rem;  /* Größere Schriftgröße für bessere Lesbarkeit */
-    width: 50%;       /* Breite der Eingabefelder */
-    padding: 12px 20px; /* Padding für größere Klickfläche und bessere Sichtbarkeit */
+    font-family: 'Inria Sans', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 10px auto;  /* Zentriert die Elemente und gibt vertikalen Abstand */
     display: block;   /* Ermöglicht margin auto zu wirken */
     border: 2px solid #cccccc; /* Grenze für Eingabefelder */
@@ -78,18 +94,22 @@ h2 {
 }
 
 .pollen-checkbox {
-    margin-right: 5px;
+    margin-right: 8px;
+    margin-left: 0;
 }
 
 .pollen-info {
-    width: 65%;
     margin: 20px auto;
-    padding: 10px;
+    padding: 15px;
     background-color: #f2f2f2;
     border: 1px solid #ddd;
     border-radius: 4px;
     display: inline-block;
     max-width: 100%;
+}
+
+.pollen-info h2 {
+    margin-bottom: 0;
 }
 
 .infoText {
@@ -98,7 +118,6 @@ h2 {
 }
 
 .legend {
-    margin-top: 20px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -108,7 +127,7 @@ h2 {
 .legend-item {
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 20px;
     margin-bottom: 10px;
 }
 
@@ -121,74 +140,194 @@ h2 {
 
 .description {
     font-size: 1rem;
+    padding-top: 2px;
 }
 
 /* Media Queries für verschiedene Bildschirmgrößen */
-
 @media (min-width: 768px) {
-    .container {
-        width: 80%;
-        max-width: 850px;
-        padding: 50px;
+
+    #pollenTypeSelect {
+        margin-bottom: 20px;
     }
-    .pollen-info {
-        width: 70%;
+
+    #pollenTypeSelect label {
+        margin-right: 25px;
     }
-    h1 {
-        font-size: 2.5rem;
+    
+    #pollenTypeSelect label:last-child {
+        margin-right: 0;
     }
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
+
+    .karte-container {
+        margin-top: 30px;
+        margin-bottom: 10px;
     }
-    #dateSelect, #hourSelect {
-        font-size: 1.1rem;
-        width: 60%;
+
+    .legend {
+        margin-top: 20px;
     }
+
 }
 
+
 @media (min-width: 992px) {
+
+    .wrapper {
+        padding: 40px;
+    }
+
     .container {
-        width: 70%;
+        width: 90%;
         max-width: 1000px;
         padding: 40px;
     }
+
+    .logo-container {
+        margin-bottom: 60px;
+    }
+
+    .logo {
+        width: 500px; /* Feste Breite für das Logo */
+    }
+
     .pollen-info {
         width: 60%;
     }
+
     h1 {
         font-size: 3rem;
     }
+
     h2 {
         font-size: 1.75rem;
         margin-bottom: 40px;
     }
+
     #dateSelect, #hourSelect {
         width: 50%;
+        padding: 12px 20px; /* Padding für größere Klickfläche und bessere Sichtbarkeit */
     }
+
 }
 
+
+@media (max-width: 991.98px) and (min-width: 768px) {
+
+    .wrapper {
+        padding: 30px;
+    }
+
+    .container {
+        width: 92%;
+        padding: 30px;
+    }
+
+    .logo-container {
+        margin-bottom: 40px;
+    }
+
+    .logo {
+        width: 500px; /* Feste Breite für das Logo */
+    }
+
+    .pollen-info {
+        width: 70%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    #dateSelect, #hourSelect {
+        width: 70%;
+        padding: 10px 18px; /* Padding für größere Klickfläche und bessere Sichtbarkeit */
+    }
+
+}
+
+
 @media (max-width: 767px) {
+
+    .wrapper {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .logo-container {
+        margin-bottom: 30px;
+    }
+
+    .logo {
+        width: 500px; /* Feste Breite für das Logo */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    #pollenTypeSelect {
+        margin-bottom: 15px;
+    }
+
+    #pollenTypeSelect label {
+        width: 100%;
+    }
+
+    #pollenTypeSelect label + label {
+        margin-top: 5px;
+    }
+
+    #dateSelect, #hourSelect {
+        width: 90%;
+        padding: 10px 15px; /* Padding für größere Klickfläche und bessere Sichtbarkeit */
+    }
+
+    .karte-container {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+
+    .pollen-info {
+        width: 100%;
+    }
+
     .legend {
         flex-direction: column;
-        align-items: center;  /* Zentriert die Legenden-Elemente */
+        align-items: center;
+        margin-top: 10px;
     }
+
     .legend-item {
         display: flex;
         align-items: center;
         margin-right: 0;
-        margin-bottom: 15px;
-        width: 100%;
-        justify-content: center;  /* Zentriert die Elemente in jedem Legendeneintrag */
+        margin-bottom: 10px;
+        width: 188px;
     }
+
     .color-box {
         width: 20px;
         height: 20px;
         display: block;
         margin-right: 10px;
     }
+
     .description {
         flex: 1;
         text-align: left;
     }
+
 }
